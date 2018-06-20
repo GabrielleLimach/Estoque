@@ -1,8 +1,7 @@
 package com.solicitacoes.seap.resource;
 
-
-import com.solicitacoes.seap.models.Categoria;
-import com.solicitacoes.seap.repository.CategoriaRepository;
+import com.solicitacoes.seap.models.Setor;
+import com.solicitacoes.seap.repository.SetorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -12,27 +11,23 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/categorias")
-public class CategoriaResource {
+@RequestMapping("/setor")
+public class SetorResource {
 
     @Autowired
-    private CategoriaRepository categoriaRepository;
+    private SetorRepository setorRepository;
 
     @GetMapping
-    private List<Categoria> listar() {
-        return categoriaRepository.findAll();
+    private List<Setor> listar() {
+        return setorRepository.findAll();
     }
 
     @PostMapping
-    private void criar(@RequestBody Categoria categoria, HttpServletResponse response){
-       Categoria categoriaSalva = categoriaRepository.save(categoria);
+    private void criar(@RequestBody Setor setor, HttpServletResponse response) {
+        Setor setorSalvo = setorRepository.save(setor);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{codigo}")
-                .buildAndExpand(categoriaSalva.getId()).toUri();
+                .buildAndExpand(setorSalvo.getIdsetor()).toUri();
         response.setHeader("Location", uri.toASCIIString());
     }
-
-
-
 }
- 

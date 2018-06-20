@@ -1,8 +1,0 @@
-CREATE TABLE setor(
-id BIGSERIAL PRIMARY KEY NOT NULL,
-nome VARCHAR (30)
-
-);
-INSERT INTO setor (nome) VALUES
-    ('SIISP'),
-    ('CEDES');
