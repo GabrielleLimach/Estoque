@@ -7,6 +7,10 @@ ADD CONSTRAINT fk_setor
 FOREIGN KEY (fk_setor) REFERENCES public.setor (idsetor);
 
 ALTER TABLE public.material
+ADD CONSTRAINT fk_setor
+FOREIGN KEY (fk_setor) REFERENCES public.setor (idsetor);
+
+ALTER TABLE public.material
 ADD CONSTRAINT fk_materialtipo
 FOREIGN KEY (fk_tipo) REFERENCES public.materialtipo (idmaterialtipo);
 

@@ -34,7 +34,7 @@ CREATE TABLE material(
   tombo VARCHAR(30),
   validade DATE,
   descricao VARCHAR(100),
-  localizacao VARCHAR(100),
+  fk_setor BIGSERIAL NOT NULL,
   fk_tipo BIGSERIAL NOT NULL,
   fk_status BIGSERIAL NOT NULL
 );
