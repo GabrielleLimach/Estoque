@@ -3,6 +3,11 @@ CREATE TABLE cargo(
   descricao VARCHAR (30)
 );
 
+CREATE TABLE categoria(
+  idcategoria BIGSERIAL PRIMARY KEY NOT NULL,
+  descricao varchar(30)
+);
+
 CREATE TABLE setor(
   idsetor BIGSERIAL PRIMARY KEY NOT NULL,
   descricao VARCHAR (30)
@@ -33,10 +38,10 @@ CREATE TABLE material(
   quantidade INT,
   tombo VARCHAR(30),
   validade DATE,
-  descricao VARCHAR(100),
   fk_setor BIGSERIAL NOT NULL,
   fk_tipo BIGSERIAL NOT NULL,
-  fk_status BIGSERIAL NOT NULL
+  fk_status BIGSERIAL NOT NULL,
+  fk_categoria BIGSERIAL NOT NULL
 );
 
 CREATE TABLE solicitacao (

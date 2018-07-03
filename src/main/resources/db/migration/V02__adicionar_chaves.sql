@@ -18,6 +18,10 @@ ALTER TABLE public.material
 ADD CONSTRAINT fk_materialstatus
 FOREIGN KEY (fk_status) REFERENCES public.materialstatus (idmaterialstatus);
 
+ALTER TABLE public.material
+ADD CONSTRAINT fk_categoria
+FOREIGN KEY (fk_categoria) REFERENCES public.categoria (idcategoria);
+
 ALTER TABLE public.solicitacao
 ADD CONSTRAINT fk_funcionario
 FOREIGN KEY (fk_funcionario) REFERENCES public.funcionario (idfuncionario);

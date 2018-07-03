@@ -1,4 +1,7 @@
 package com.solicitacoes.seap.repository;
 
-public interface MaterialRepository {
+import com.solicitacoes.seap.models.Material;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface MaterialRepository extends JpaRepository <Material, Long> {
 }

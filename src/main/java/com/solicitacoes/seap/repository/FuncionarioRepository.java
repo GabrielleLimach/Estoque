@@ -1,4 +1,7 @@
 package com.solicitacoes.seap.repository;
 
-public interface FuncionarioRepository {
+import com.solicitacoes.seap.models.Funcionario;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface FuncionarioRepository extends JpaRepository <Funcionario, Long > {
 }

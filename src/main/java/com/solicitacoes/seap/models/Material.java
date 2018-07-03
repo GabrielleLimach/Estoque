@@ -15,7 +15,6 @@ public class Material {
     private int quantidade;
     private String tombo;
     private LocalDate validade;
-    private String descricao;
 
     @ManyToOne
     @JoinColumn(name = "fk_setor")
@@ -28,6 +27,14 @@ public class Material {
     @ManyToOne
     @JoinColumn(name = "fk_materialstatus")
     private MaterialStatus fkmaterialstatus;
+
+    @ManyToOne
+    @JoinColumn(name = "fk_categoria")
+    private Categoria fkcategoria;
+
+    public Categoria getFkcategoria() { return fkcategoria;   }
+
+    public void setFkcategoria(Categoria fkcategoria) { this.fkcategoria = fkcategoria; }
 
     public Long getIdmaterial() {
         return idmaterial;
@@ -67,14 +74,6 @@ public class Material {
 
     public void setValidade(LocalDate validade) {
         this.validade = validade;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
     }
 
     public Setor getFksetor() {

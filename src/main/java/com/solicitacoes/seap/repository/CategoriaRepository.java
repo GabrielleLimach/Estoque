@@ -1,4 +1,7 @@
 package com.solicitacoes.seap.repository;
 
-public interface CategoriaRepository {
+import com.solicitacoes.seap.models.Categoria;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CategoriaRepository extends JpaRepository <Categoria, Long> {
 }
