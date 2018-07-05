@@ -39,7 +39,7 @@ CREATE TABLE material(
   tombo VARCHAR(30),
   validade DATE,
   fk_setor BIGSERIAL NOT NULL,
-  fk_tipo BIGSERIAL NOT NULL,
+  fk_materialtipo BIGSERIAL NOT NULL,
   fk_status BIGSERIAL NOT NULL,
   fk_categoria BIGSERIAL NOT NULL
 );
