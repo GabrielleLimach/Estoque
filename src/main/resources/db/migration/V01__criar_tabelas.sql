@@ -62,7 +62,7 @@ CREATE TABLE solicitacaoitem (
 );
 
 CREATE TABLE solicitacaostatus (
-  idsolicitacaoestatus BIGSERIAL PRIMARY KEY NOT NULL,
+  idsolicitacaostatus BIGSERIAL PRIMARY KEY NOT NULL,
   status VARCHAR (30)
 );
 

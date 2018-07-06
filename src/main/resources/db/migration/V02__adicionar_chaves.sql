@@ -28,7 +28,7 @@ FOREIGN KEY (fk_funcionario) REFERENCES public.funcionario (idfuncionario);
 
 ALTER TABLE public.solicitacao
 ADD CONSTRAINT fk_solicitacaostatus
-FOREIGN KEY (fk_solicitacaostatus) REFERENCES public.solicitacaostatus (idsolicitacaoestatus);
+FOREIGN KEY (fk_solicitacaostatus) REFERENCES public.solicitacaostatus (idsolicitacaostatus);
 
 ALTER TABLE public.historico
 ADD CONSTRAINT fk_solicitacao

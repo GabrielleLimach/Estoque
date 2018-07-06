@@ -39,20 +39,20 @@ public class HistoricoResource {
             return ResponseEntity.created(uri).body(historicosalvo);
     }
 
-    @GetMapping("/idhistorico")
+    @GetMapping("/{idhistorico}")
     private ResponseEntity<Historico> buscarPeloCodico(@PathVariable("idhistorico") Long id){
     return  ResponseEntity.ok(historicoRepository.findById(id).get());
 
     }
 
-    @DeleteMapping("/idhistorico")
+    @DeleteMapping("/{idhistorico}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     private void remover(@PathVariable("idmaterial")Long id){
         Historico historicoSalvo = historicoRepository.findById(id).get();
         historicoRepository.delete(historicoSalvo);
     }
 
-    @PutMapping("/idhistorico")
+    @PutMapping("/{idhistorico}")
     private ResponseEntity<Historico> atualizar(@PathVariable("idhistorico")Long id, @Valid @RequestBody Historico historico){
         Historico historicoSalvo = historicoRepository.findById(id).get();
         BeanUtils.copyProperties(historico, historicoSalvo, "idhistorico");

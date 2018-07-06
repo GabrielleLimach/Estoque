@@ -40,20 +40,20 @@ public class MaterialResource {
         return ResponseEntity.created(uri).body(materialSalvo);
     }
 
-    @GetMapping("/idmaterial")
+    @GetMapping("/{idmaterial}")
     private ResponseEntity<Material> buscarPeloCodico(@PathVariable("idmaterial") Long id){
         return  ResponseEntity.ok(materialRepository.findById(id).get());
 
     }
 
-    @DeleteMapping("/idmaterial")
+    @DeleteMapping("/{idmaterial}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     private void remover(@PathVariable("idmaterial")Long id){
         Material materialSalvo = materialRepository.findById(id).get();
         materialRepository.delete(materialSalvo);
     }
 
-    @PutMapping("/idmaterial")
+    @PutMapping("/{idmaterial}")
     private ResponseEntity<Material> atualizar(@PathVariable("idmaterial")Long id, @Valid @RequestBody Material material){
         Material materialSalvo = materialRepository.findById(id).get();
         BeanUtils.copyProperties(material, materialSalvo, "idmaterial");
