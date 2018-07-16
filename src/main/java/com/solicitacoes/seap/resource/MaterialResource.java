@@ -58,7 +58,7 @@ public class MaterialResource {
     //insere um novo material, e retorna o material recem inserido
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    private ResponseEntity<Material> criar (@RequestBody Material material, HttpServletResponse response){
+    private ResponseEntity<Material> criar (@Valid @RequestBody Material material, HttpServletResponse response){
 
         Material materialSalvo = materialRepository.save(material);
 
@@ -68,7 +68,10 @@ public class MaterialResource {
         return ResponseEntity.created(uri).body(materialSalvo);
     }
 
+<<<<<<< HEAD
     //retorna uma material especifico a partir do id (codigo) do material
+=======
+>>>>>>> cdb7df224fde77ab9c4caf38a8a206bb0b0cd47a
     @GetMapping("/{idmaterial}")
     private ResponseEntity<Material> buscarPeloCodico(@PathVariable("idmaterial") Long id){
 
@@ -76,7 +79,10 @@ public class MaterialResource {
 
     }
 
+<<<<<<< HEAD
     //deleta pelo id (codigo) o material informado
+=======
+>>>>>>> cdb7df224fde77ab9c4caf38a8a206bb0b0cd47a
     @DeleteMapping("/{idmaterial}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     private void remover(@PathVariable("idmaterial")Long id){
@@ -84,8 +90,12 @@ public class MaterialResource {
         materialRepository.delete(materialSalvo);
     }
 
+<<<<<<< HEAD
     //alterar os dados de um material ja cadastrado
     @PutMapping("/idmaterial")
+=======
+    @PutMapping("/{idmaterial}")
+    >>>>>>> cdb7df224fde77ab9c4caf38a8a206bb0b0cd47a
     private ResponseEntity<Material> atualizar(@PathVariable("idmaterial")Long id, @Valid @RequestBody Material material){
         Material materialSalvo = materialRepository.findById(id).get();
         BeanUtils.copyProperties(material, materialSalvo, "idmaterial");

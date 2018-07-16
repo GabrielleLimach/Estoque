@@ -1,6 +1,6 @@
 package com.solicitacoes.seap.resource;
 
-import com.solicitacoes.seap.models.Historico;
+import com.solicitacoes.seap.models.*;
 import com.solicitacoes.seap.repository.HistoricoRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +9,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.persistence.*;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.net.URI;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/historico")
@@ -39,20 +43,20 @@ public class HistoricoResource {
             return ResponseEntity.created(uri).body(historicosalvo);
     }
 
-    @GetMapping("/idhistorico")
+    @GetMapping("/{idhistorico}")
     private ResponseEntity<Historico> buscarPeloCodico(@PathVariable("idhistorico") Long id){
     return  ResponseEntity.ok(historicoRepository.findById(id).get());
 
     }
 
-    @DeleteMapping("/idhistorico")
+    @DeleteMapping("/{idhistorico}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     private void remover(@PathVariable("idmaterial")Long id){
         Historico historicoSalvo = historicoRepository.findById(id).get();
         historicoRepository.delete(historicoSalvo);
     }
 
-    @PutMapping("/idhistorico")
+    @PutMapping("/{idhistorico}")
     private ResponseEntity<Historico> atualizar(@PathVariable("idhistorico")Long id, @Valid @RequestBody Historico historico){
         Historico historicoSalvo = historicoRepository.findById(id).get();
         BeanUtils.copyProperties(historico, historicoSalvo, "idhistorico");
