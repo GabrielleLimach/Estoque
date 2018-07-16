@@ -1,6 +1,7 @@
 package com.solicitacoes.seap.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -11,6 +12,8 @@ public class Material {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idmaterial;
+
+    @NotNull
     private String nome;
     private int quantidade;
     private String tombo;
@@ -113,4 +116,5 @@ public class Material {
 
         return Objects.hash(idmaterial);
     }
+
 }

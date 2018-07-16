@@ -1,6 +1,8 @@
 package com.solicitacoes.seap.models;
 
 
+import com.solicitacoes.seap.resource.HistoricoResource;
+
 import javax.persistence.*;
 import java.util.Objects;
 

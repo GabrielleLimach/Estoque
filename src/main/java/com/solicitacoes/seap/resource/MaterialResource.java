@@ -30,7 +30,7 @@ public class MaterialResource {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    private ResponseEntity<Material> criar (@RequestBody Material material, HttpServletResponse response){
+    private ResponseEntity<Material> criar (@Valid @RequestBody Material material, HttpServletResponse response){
 
         Material materialSalvo = materialRepository.save(material);
 
