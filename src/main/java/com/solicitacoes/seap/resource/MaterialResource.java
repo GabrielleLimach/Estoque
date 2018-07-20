@@ -3,23 +3,16 @@ package com.solicitacoes.seap.resource;
 import com.solicitacoes.seap.models.Material;
 import com.solicitacoes.seap.models.MaterialTipo;
 import com.solicitacoes.seap.repository.MaterialRepository;
-import org.hibernate.annotations.Persister;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.flyway.FlywayDataSource;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -68,10 +61,8 @@ public class MaterialResource {
         return ResponseEntity.created(uri).body(materialSalvo);
     }
 
-<<<<<<< HEAD
+
     //retorna uma material especifico a partir do id (codigo) do material
-=======
->>>>>>> cdb7df224fde77ab9c4caf38a8a206bb0b0cd47a
     @GetMapping("/{idmaterial}")
     private ResponseEntity<Material> buscarPeloCodico(@PathVariable("idmaterial") Long id){
 
@@ -79,10 +70,7 @@ public class MaterialResource {
 
     }
 
-<<<<<<< HEAD
     //deleta pelo id (codigo) o material informado
-=======
->>>>>>> cdb7df224fde77ab9c4caf38a8a206bb0b0cd47a
     @DeleteMapping("/{idmaterial}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     private void remover(@PathVariable("idmaterial")Long id){
@@ -90,12 +78,9 @@ public class MaterialResource {
         materialRepository.delete(materialSalvo);
     }
 
-<<<<<<< HEAD
+
     //alterar os dados de um material ja cadastrado
-    @PutMapping("/idmaterial")
-=======
     @PutMapping("/{idmaterial}")
-    >>>>>>> cdb7df224fde77ab9c4caf38a8a206bb0b0cd47a
     private ResponseEntity<Material> atualizar(@PathVariable("idmaterial")Long id, @Valid @RequestBody Material material){
         Material materialSalvo = materialRepository.findById(id).get();
         BeanUtils.copyProperties(material, materialSalvo, "idmaterial");
