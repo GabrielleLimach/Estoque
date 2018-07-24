@@ -26,42 +26,42 @@ public class HistoricoResource {
     private HistoricoRepository historicoRepository;
 
     @GetMapping
-    private List<Historico> listar(){
+    private List<Historico> listar() {
 
         return historicoRepository.findAll();
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    private ResponseEntity<Historico> criar (@RequestBody Historico historico, HttpServletResponse response){
+    private ResponseEntity<Historico> criar(@RequestBody Historico historico, HttpServletResponse response) {
 
-    Historico historicosalvo = historicoRepository.save(historico);
+        Historico historicosalvo = historicoRepository.save(historico);
 
-    URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{idhistorico}")
-            .buildAndExpand(historicosalvo.getIdhistorico()).toUri();
-            response.setHeader("Location", uri.toASCIIString());
-            return ResponseEntity.created(uri).body(historicosalvo);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{idhistorico}")
+                .buildAndExpand(historicosalvo.getIdhistorico()).toUri();
+        response.setHeader("Location", uri.toASCIIString());
+        return ResponseEntity.created(uri).body(historicosalvo);
     }
 
     @GetMapping("/{idhistorico}")
-    private ResponseEntity<Historico> buscarPeloCodico(@PathVariable("idhistorico") Long id){
-    return  ResponseEntity.ok(historicoRepository.findById(id).get());
+    private ResponseEntity<Historico> buscarPeloCodico(@PathVariable("idhistorico") Long id) {
+        return ResponseEntity.ok(historicoRepository.findById(id).get());
 
     }
 
     @DeleteMapping("/{idhistorico}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    private void remover(@PathVariable("idmaterial")Long id){
+    private void remover(@PathVariable("idmaterial") Long id) {
         Historico historicoSalvo = historicoRepository.findById(id).get();
         historicoRepository.delete(historicoSalvo);
     }
 
     @PutMapping("/{idhistorico}")
-    private ResponseEntity<Historico> atualizar(@PathVariable("idhistorico")Long id, @Valid @RequestBody Historico historico){
+    private ResponseEntity<Historico> atualizar(@PathVariable("idhistorico") Long id, @Valid @RequestBody Historico historico) {
         Historico historicoSalvo = historicoRepository.findById(id).get();
         BeanUtils.copyProperties(historico, historicoSalvo, "idhistorico");
         historicoRepository.save(historicoSalvo);
-        return  ResponseEntity.ok(historicoSalvo);
+        return ResponseEntity.ok(historicoSalvo);
 
     }
 }

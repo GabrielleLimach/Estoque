@@ -20,12 +20,12 @@ public class CargoResource {
 
 
     @GetMapping
-    private List<Cargo> listar(){
+    private List<Cargo> listar() {
         return cargoRepository.findAll();
     }
 
     @PostMapping
-    private void criar(@RequestBody Cargo cargo, HttpServletResponse response){
+    private void criar(@RequestBody Cargo cargo, HttpServletResponse response) {
         Cargo cargoSalvo = cargoRepository.save(cargo);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/idcargo")

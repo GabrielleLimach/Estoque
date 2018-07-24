@@ -28,16 +28,20 @@ public class Material {
     private MaterialTipo fkmaterialtipo;
 
     @ManyToOne
-    @JoinColumn(name = "fk_materialstatus")
+    @JoinColumn(name = "fk_status")
     private MaterialStatus fkmaterialstatus;
 
     @ManyToOne
     @JoinColumn(name = "fk_categoria")
     private Categoria fkcategoria;
 
-    public Categoria getFkcategoria() { return fkcategoria;   }
+    public Categoria getFkcategoria() {
+        return fkcategoria;
+    }
 
-    public void setFkcategoria(Categoria fkcategoria) { this.fkcategoria = fkcategoria; }
+    public void setFkcategoria(Categoria fkcategoria) {
+        this.fkcategoria = fkcategoria;
+    }
 
     public Long getIdmaterial() {
         return idmaterial;

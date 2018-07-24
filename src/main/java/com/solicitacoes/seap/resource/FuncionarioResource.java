@@ -19,16 +19,15 @@ public class FuncionarioResource {
     private FuncionarioRepository funcionarioRepository;
 
     @GetMapping
-    private List<Funcionario> listar(){
-        return  funcionarioRepository.findAll();
+    private List<Funcionario> listar() {
+        return funcionarioRepository.findAll();
     }
 
     @PostMapping
-    private void criar(@RequestBody Funcionario funcionario, HttpServletResponse response ){
+    private void criar(@RequestBody Funcionario funcionario, HttpServletResponse response) {
         Funcionario funcionarioSalvo = funcionarioRepository.save(funcionario);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/idfuncionario").buildAndExpand().toUri();
-
 
 
     }
