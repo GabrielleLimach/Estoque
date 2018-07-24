@@ -15,12 +15,12 @@ import java.util.List;
 public class MaterialTipoResource {
 
 
-        @Autowired
-        private MaterialTipoRepository materialTipoRepository;
+    @Autowired
+    private MaterialTipoRepository materialTipoRepository;
 
-        @GetMapping
-        private List<MaterialTipo> listar(){
+    @GetMapping
+    private List<MaterialTipo> listar() {
 
-            return materialTipoRepository.findAll();
-        }
+        return materialTipoRepository.findAll();
+    }
 }

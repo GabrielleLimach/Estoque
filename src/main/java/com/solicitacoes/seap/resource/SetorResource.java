@@ -26,7 +26,7 @@ public class SetorResource {
     private void criar(@RequestBody Setor setor, HttpServletResponse response) {
         Setor setorSalvo = setorRepository.save(setor);
 
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{codigo}")
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{idsetor}")
                 .buildAndExpand(setorSalvo.getIdsetor()).toUri();
         response.setHeader("Location", uri.toASCIIString());
     }

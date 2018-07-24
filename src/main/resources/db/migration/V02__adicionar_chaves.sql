@@ -15,7 +15,7 @@ ADD CONSTRAINT fk_materialtipo
 FOREIGN KEY (fk_materialtipo) REFERENCES public.materialtipo (idmaterialtipo);
 
 ALTER TABLE public.material
-ADD CONSTRAINT fk_materialstatus
+ADD CONSTRAINT fk_status
 FOREIGN KEY (fk_status) REFERENCES public.materialstatus (idmaterialstatus);
 
 ALTER TABLE public.material

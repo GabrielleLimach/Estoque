@@ -25,7 +25,7 @@ public class MaterialResource {
 
     //retorna uma lista com todos os materiais
     @GetMapping
-    private List<Material> listar(){
+    private List<Material> listar() {
 
         return materialRepository.findAll();
     }
@@ -33,17 +33,17 @@ public class MaterialResource {
 
     //retorna uma lista de materiais de acordo com a quantidade informada
     @GetMapping("/qde/{quantidade}")
-    private List<Material> buscarPeloTipo(@PathVariable("quantidade") int id){
+    private List<Material> buscarPeloTipo(@PathVariable("quantidade") int id) {
 
-        return  materialRepository.findByQuantidade(id);
+        return materialRepository.findByQuantidade(id);
 
     }
 
     //retorna uma lista de materiais de acordo com o tipo informado
     @GetMapping("/tipo/{fkmaterialtipo}")
-    private List<Material> buscarPeloTipo(@PathVariable("fkmaterialtipo") MaterialTipo id){
+    private List<Material> buscarPeloTipo(@PathVariable("fkmaterialtipo") MaterialTipo id) {
 
-        return  materialRepository.findByFkmaterialtipo(id);
+        return materialRepository.findByFkmaterialtipo(id);
 
     }
 
@@ -51,7 +51,7 @@ public class MaterialResource {
     //insere um novo material, e retorna o material recem inserido
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    private ResponseEntity<Material> criar (@Valid @RequestBody Material material, HttpServletResponse response){
+    private ResponseEntity<Material> criar(@Valid @RequestBody Material material, HttpServletResponse response) {
 
         Material materialSalvo = materialRepository.save(material);
 
@@ -64,16 +64,16 @@ public class MaterialResource {
 
     //retorna uma material especifico a partir do id (codigo) do material
     @GetMapping("/{idmaterial}")
-    private ResponseEntity<Material> buscarPeloCodico(@PathVariable("idmaterial") Long id){
+    private ResponseEntity<Material> buscarPeloCodico(@PathVariable("idmaterial") Long id) {
 
-        return  ResponseEntity.ok(materialRepository.findById(id).get());
+        return ResponseEntity.ok(materialRepository.findById(id).get());
 
     }
 
     //deleta pelo id (codigo) o material informado
     @DeleteMapping("/{idmaterial}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    private void remover(@PathVariable("idmaterial")Long id){
+    private void remover(@PathVariable("idmaterial") Long id) {
         Material materialSalvo = materialRepository.findById(id).get();
         materialRepository.delete(materialSalvo);
     }
@@ -81,11 +81,11 @@ public class MaterialResource {
 
     //alterar os dados de um material ja cadastrado
     @PutMapping("/{idmaterial}")
-    private ResponseEntity<Material> atualizar(@PathVariable("idmaterial")Long id, @Valid @RequestBody Material material){
+    private ResponseEntity<Material> atualizar(@PathVariable("idmaterial") Long id, @Valid @RequestBody Material material) {
         Material materialSalvo = materialRepository.findById(id).get();
         BeanUtils.copyProperties(material, materialSalvo, "idmaterial");
         materialRepository.save(materialSalvo);
-        return  ResponseEntity.ok(materialSalvo);
+        return ResponseEntity.ok(materialSalvo);
 
     }
 }

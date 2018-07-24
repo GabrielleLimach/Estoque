@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/categorias")
+@CrossOrigin("*")
 public class CategoriaResource {
 
     @Autowired
@@ -25,7 +26,7 @@ public class CategoriaResource {
 
 
     @PostMapping
-    private void criar(@RequestBody Categoria categoria, HttpServletResponse response){
+    private void criar(@RequestBody Categoria categoria, HttpServletResponse response) {
         Categoria categoriaSalva = categoriaRepository.save(categoria);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/idcategoria")
