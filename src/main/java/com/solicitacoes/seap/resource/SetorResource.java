@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/setor")
+@CrossOrigin("*")
 public class SetorResource {
 
     @Autowired

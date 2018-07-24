@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/funcionarios")
+@CrossOrigin("*")
 public class FuncionarioResource {
 
     @Autowired
