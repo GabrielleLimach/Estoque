@@ -18,6 +18,10 @@ public class Solicitacao {
     @JoinColumn(name = "fk_funcionario")
     private Funcionario fkfuncionario;
 
+    @ManyToOne
+    @JoinColumn(name = "fk_solicitacaostatus")
+    private SolicitacaoStatus fksolcitacaostatus;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -68,11 +72,5 @@ public class Solicitacao {
         return fksolcitacaostatus;
     }
 
-    public void setFksolcitacaostatus(SolicitacaoStatus fksolcitacaostatus) {
-        this.fksolcitacaostatus = fksolcitacaostatus;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "fk_solicitacaostatus")
-    private SolicitacaoStatus fksolcitacaostatus;
+    public void setFksolcitacaostatus(SolicitacaoStatus fksolcitacaostatus) { this.fksolcitacaostatus = fksolcitacaostatus; }
 }
