@@ -2,6 +2,7 @@ package com.solicitacoes.seap.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -14,6 +15,7 @@ public class Material {
     private Long idmaterial;
 
     @NotNull
+    @Size(min =3, max = 20)
     private String nome;
     private int quantidade;
     private String tombo;

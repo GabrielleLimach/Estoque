@@ -12,4 +12,6 @@ public interface MaterialRepository extends JpaRepository<Material, Long> {
 
     List<Material> findByFkmaterialtipo(MaterialTipo fkmaterialtipo);
 
+    List<Material> findBynome (Material material);
+
 }

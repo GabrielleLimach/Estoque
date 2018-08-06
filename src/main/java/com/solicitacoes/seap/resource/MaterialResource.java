@@ -1,18 +1,18 @@
 package com.solicitacoes.seap.resource;
 
+import com.solicitacoes.seap.event.RecursoCriadoEvent;
 import com.solicitacoes.seap.models.Material;
 import com.solicitacoes.seap.models.MaterialTipo;
 import com.solicitacoes.seap.repository.MaterialRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -22,6 +22,20 @@ public class MaterialResource {
 
     @Autowired
     private MaterialRepository materialRepository;
+
+    @Autowired
+    private ApplicationEventPublisher publisher;
+
+
+    //insere um novo material, e retorna o material recem inserido
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    private ResponseEntity<Material> criar(@Valid @RequestBody Material material, HttpServletResponse response) {
+        Material materialSalvo = materialRepository.save(material);
+        publisher.publishEvent(new RecursoCriadoEvent(this, response, materialSalvo.getIdmaterial()));
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(materialSalvo);
+    }
 
     //retorna uma lista com todos os materiais
     @GetMapping
@@ -36,8 +50,8 @@ public class MaterialResource {
     private List<Material> buscarPeloTipo(@PathVariable("quantidade") int id) {
 
         return materialRepository.findByQuantidade(id);
-
     }
+
 
     //retorna uma lista de materiais de acordo com o tipo informado
     @GetMapping("/tipo/{fkmaterialtipo}")
@@ -46,21 +60,6 @@ public class MaterialResource {
         return materialRepository.findByFkmaterialtipo(id);
 
     }
-
-
-    //insere um novo material, e retorna o material recem inserido
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    private ResponseEntity<Material> criar(@Valid @RequestBody Material material, HttpServletResponse response) {
-
-        Material materialSalvo = materialRepository.save(material);
-
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{idmaterial}")
-                .buildAndExpand(materialSalvo.getIdmaterial()).toUri();
-        response.setHeader("Location", uri.toASCIIString());
-        return ResponseEntity.created(uri).body(materialSalvo);
-    }
-
 
     //retorna uma material especifico a partir do id (codigo) do material
     @GetMapping("/{idmaterial}")

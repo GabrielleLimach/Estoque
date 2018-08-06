@@ -1,13 +1,18 @@
 package com.solicitacoes.seap.resource;
 
 
+import com.solicitacoes.seap.event.RecursoCriadoEvent;
 import com.solicitacoes.seap.models.Cargo;
 import com.solicitacoes.seap.repository.CargoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -19,6 +24,9 @@ public class CargoResource {
     @Autowired
     private CargoRepository cargoRepository;
 
+    @Autowired
+    private ApplicationEventPublisher publisher;
+
 
     @GetMapping
     private List<Cargo> listar() {
@@ -26,12 +34,13 @@ public class CargoResource {
     }
 
     @PostMapping
-    private void criar(@RequestBody Cargo cargo, HttpServletResponse response) {
+    @ResponseStatus(HttpStatus.CREATED)
+    private ResponseEntity<Cargo> criar(@Valid @RequestBody Cargo cargo, HttpServletResponse response) {
         Cargo cargoSalvo = cargoRepository.save(cargo);
+        publisher.publishEvent(new RecursoCriadoEvent(this, response, cargoSalvo.getIdcargo()));
 
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/idcargo")
-                .buildAndExpand(cargoSalvo.getIdcargo()).toUri();
-        response.setHeader("Location", uri.toASCIIString());
+        return ResponseEntity.status(HttpStatus.CREATED).body(cargoSalvo);
 
     }
+
 }
