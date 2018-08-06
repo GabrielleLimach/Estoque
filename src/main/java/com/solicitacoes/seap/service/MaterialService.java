@@ -14,11 +14,23 @@ public class MaterialService {
     MaterialRepository materialRepository;
 
     public Material atualizar(Long id, Material material) {
+        Material materialSalvo = buscarMaterialPeloCodigo(id);
+
+        BeanUtils.copyProperties(material, materialSalvo, "id");
+        return materialRepository.save(materialSalvo);
+    }
+
+    //public void atualizarPropriedadeStatus(Long id, Boolean disponivel){
+        //Material materialSalvo = buscarMaterialPeloCodigo(id);
+        //materialSalvo.setFkmaterialstatus(disponivel);
+        //materialRepository.save(materialSalvo);
+    //}
+
+    private Material buscarMaterialPeloCodigo(Long id) {
         Material materialSalvo = materialRepository.getOne(id);
         if (materialSalvo == null) {
             throw new EmptyResultDataAccessException(1);
         }
-        BeanUtils.copyProperties(material, materialSalvo, "id");
-        return materialRepository.save(materialSalvo);
+        return materialSalvo;
     }
 }

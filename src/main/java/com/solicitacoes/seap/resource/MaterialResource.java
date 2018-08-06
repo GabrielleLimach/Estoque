@@ -4,6 +4,7 @@ import com.solicitacoes.seap.event.RecursoCriadoEvent;
 import com.solicitacoes.seap.models.Material;
 import com.solicitacoes.seap.models.MaterialTipo;
 import com.solicitacoes.seap.repository.MaterialRepository;
+import com.solicitacoes.seap.service.MaterialService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
@@ -25,6 +26,9 @@ public class MaterialResource {
 
     @Autowired
     private ApplicationEventPublisher publisher;
+
+    @Autowired
+    private MaterialService materialService;
 
 
     //insere um novo material, e retorna o material recem inserido
@@ -85,6 +89,13 @@ public class MaterialResource {
         BeanUtils.copyProperties(material, materialSalvo, "idmaterial");
         materialRepository.save(materialSalvo);
         return ResponseEntity.ok(materialSalvo);
+
+    }
+
+    @PutMapping("/{idmaterial}/status")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void atualizarPropriedadeStatus(@PathVariable Long id, @RequestBody boolean status) {
+        //materialService.atualizarPropriedadeStatus(id, disponivel);
 
     }
 }
