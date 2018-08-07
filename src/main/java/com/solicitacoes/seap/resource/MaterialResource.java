@@ -4,6 +4,7 @@ import com.solicitacoes.seap.event.RecursoCriadoEvent;
 import com.solicitacoes.seap.models.Material;
 import com.solicitacoes.seap.models.MaterialTipo;
 import com.solicitacoes.seap.repository.MaterialRepository;
+import com.solicitacoes.seap.repository.filter.MaterialFilter;
 import com.solicitacoes.seap.service.MaterialService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +44,7 @@ public class MaterialResource {
 
     //retorna uma lista com todos os materiais
     @GetMapping
-    private List<Material> listar() {
+    private List<Material> pesquisar(MaterialFilter materialFilter) {
 
         return materialRepository.findAll();
     }
