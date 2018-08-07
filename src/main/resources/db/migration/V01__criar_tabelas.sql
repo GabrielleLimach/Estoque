@@ -20,7 +20,7 @@ CREATE TABLE materialtipo(
 
 CREATE TABLE materialstatus(
   idmaterialstatus BIGSERIAL PRIMARY KEY NOT NULL,
-  status VARCHAR (30)
+  status BOOLEAN
 );
 
 CREATE TABLE funcionario(

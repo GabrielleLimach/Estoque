@@ -10,7 +10,16 @@ public class MaterialStatus {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idmaterialstatus;
-    private String status;
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    private boolean status;
 
     @Override
     public boolean equals(Object o) {
@@ -35,11 +44,5 @@ public class MaterialStatus {
         this.idmaterialstatus = idmaterialstatus;
     }
 
-    public String getStatus() {
-        return status;
-    }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
 }

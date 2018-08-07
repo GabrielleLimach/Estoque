@@ -20,12 +20,6 @@ public class MaterialService {
         return materialRepository.save(materialSalvo);
     }
 
-    //public void atualizarPropriedadeStatus(Long id, Boolean disponivel){
-        //Material materialSalvo = buscarMaterialPeloCodigo(id);
-        //materialSalvo.setFkmaterialstatus(disponivel);
-        //materialRepository.save(materialSalvo);
-    //}
-
     private Material buscarMaterialPeloCodigo(Long id) {
         Material materialSalvo = materialRepository.getOne(id);
         if (materialSalvo == null) {

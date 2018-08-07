@@ -91,11 +91,4 @@ public class MaterialResource {
         return ResponseEntity.ok(materialSalvo);
 
     }
-
-    @PutMapping("/{idmaterial}/status")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void atualizarPropriedadeStatus(@PathVariable Long id, @RequestBody boolean status) {
-        //materialService.atualizarPropriedadeStatus(id, disponivel);
-
-    }
 }

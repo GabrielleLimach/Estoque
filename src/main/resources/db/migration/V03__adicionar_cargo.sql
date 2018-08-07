@@ -1,4 +1,4 @@
-INSERT INTO public.materialstatus(status) VALUES ('Disponível'),( 'Indisponível');
+INSERT INTO public.materialstatus(status) VALUES ('True'),( 'False');
 
 INSERT INTO public.cargo(descricao) VALUES ('Estagiário'),( 'Administrativo');
 
