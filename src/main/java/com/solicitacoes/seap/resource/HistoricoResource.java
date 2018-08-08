@@ -1,17 +1,17 @@
 package com.solicitacoes.seap.resource;
 
+import com.solicitacoes.seap.event.RecursoCriadoEvent;
 import com.solicitacoes.seap.models.Historico;
 import com.solicitacoes.seap.repository.HistoricoRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -22,6 +22,9 @@ public class HistoricoResource {
     @Autowired
     private HistoricoRepository historicoRepository;
 
+    @Autowired
+    private ApplicationEventPublisher publisher;
+
     @GetMapping
     private List<Historico> listar() {
 
@@ -31,13 +34,10 @@ public class HistoricoResource {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     private ResponseEntity<Historico> criar(@RequestBody Historico historico, HttpServletResponse response) {
-
         Historico historicosalvo = historicoRepository.save(historico);
+        publisher.publishEvent(new RecursoCriadoEvent(this, response, historicosalvo.getIdhistorico()));
 
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{idhistorico}")
-                .buildAndExpand(historicosalvo.getIdhistorico()).toUri();
-        response.setHeader("Location", uri.toASCIIString());
-        return ResponseEntity.created(uri).body(historicosalvo);
+        return ResponseEntity.status(HttpStatus.CREATED).body(historicosalvo);
     }
 
     @GetMapping("/{idhistorico}")

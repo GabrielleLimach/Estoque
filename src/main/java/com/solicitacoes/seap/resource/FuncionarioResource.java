@@ -1,14 +1,17 @@
 package com.solicitacoes.seap.resource;
 
 
+import com.solicitacoes.seap.event.RecursoCriadoEvent;
 import com.solicitacoes.seap.models.Funcionario;
 import com.solicitacoes.seap.repository.FuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletResponse;
-import java.net.URI;
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -19,17 +22,21 @@ public class FuncionarioResource {
     @Autowired
     private FuncionarioRepository funcionarioRepository;
 
+    @Autowired
+    private ApplicationEventPublisher publisher;
+
     @GetMapping
     private List<Funcionario> listar() {
         return funcionarioRepository.findAll();
     }
 
     @PostMapping
-    private void criar(@RequestBody Funcionario funcionario, HttpServletResponse response) {
+    @ResponseStatus(HttpStatus.CREATED)
+    private ResponseEntity<Funcionario> criar(@Valid @RequestBody Funcionario funcionario, HttpServletResponse response) {
         Funcionario funcionarioSalvo = funcionarioRepository.save(funcionario);
+        publisher.publishEvent(new RecursoCriadoEvent(this, response, funcionarioSalvo.getIdfuncionario()));
 
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/idfuncionario").buildAndExpand().toUri();
-
+        return ResponseEntity.status(HttpStatus.CREATED).body(funcionarioSalvo);
 
     }
 }

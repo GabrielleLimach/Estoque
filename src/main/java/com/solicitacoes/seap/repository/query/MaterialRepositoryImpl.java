@@ -11,7 +11,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,10 +32,10 @@ public class MaterialRepositoryImpl implements MaterialRepositoryQuery {
         return query.getResultList();
     }
 
-    public Predicate[] criarRestricoes(MaterialFilter materialFilter, CriteriaBuilder builder, Root<Material> root){
+    public Predicate[] criarRestricoes(MaterialFilter materialFilter, CriteriaBuilder builder, Root<Material> root) {
         List<Predicate> predicates = new ArrayList<>();
 
-        if (!StringUtils.isEmpty(materialFilter.getNome())){
+        if (!StringUtils.isEmpty(materialFilter.getNome())) {
             predicates.add(builder.like(builder.lower(root.get("nome")), "%" + materialFilter.getNome().toLowerCase() + "%"));
 
         }
