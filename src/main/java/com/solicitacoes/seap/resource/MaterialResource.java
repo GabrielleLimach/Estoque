@@ -9,6 +9,8 @@ import com.solicitacoes.seap.service.MaterialService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -44,9 +46,9 @@ public class MaterialResource {
 
     //retorna uma lista com todos os materiais
     @GetMapping
-    private List<Material> pesquisar(MaterialFilter materialFilter) {
+    private Page<Material> pesquisar(MaterialFilter materialFilter, Pageable pegeable) {
 
-        return materialRepository.filtrar(materialFilter);
+        return materialRepository.filtrar(materialFilter, pegeable);
     }
 
 
