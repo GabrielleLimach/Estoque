@@ -1,6 +1,7 @@
 package com.solicitacoes.seap.repository.query;
 
 import com.solicitacoes.seap.models.Material;
+import com.solicitacoes.seap.models.Material_;
 import com.solicitacoes.seap.repository.filter.MaterialFilter;
 import org.apache.commons.lang3.StringUtils;
 
@@ -13,6 +14,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class MaterialRepositoryImpl implements MaterialRepositoryQuery {
 
@@ -36,7 +38,7 @@ public class MaterialRepositoryImpl implements MaterialRepositoryQuery {
         List<Predicate> predicates = new ArrayList<>();
 
         if (!StringUtils.isEmpty(materialFilter.getNome())) {
-            predicates.add(builder.like(builder.lower(root.get("nome")), "%" + materialFilter.getNome().toLowerCase() + "%"));
+            predicates.add(builder.like(root.get(Material_.nome), "%" + materialFilter.getNome().toLowerCase() + "%"));
 
         }
 

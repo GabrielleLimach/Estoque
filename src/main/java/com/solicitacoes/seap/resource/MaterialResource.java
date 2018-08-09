@@ -46,7 +46,7 @@ public class MaterialResource {
     @GetMapping
     private List<Material> pesquisar(MaterialFilter materialFilter) {
 
-        return materialRepository.findAll();
+        return materialRepository.filtrar(materialFilter);
     }
 
 
