@@ -1,5 +1,6 @@
 package com.solicitacoes.seap.repository;
 
+import com.solicitacoes.seap.models.Categoria;
 import com.solicitacoes.seap.models.Material;
 import com.solicitacoes.seap.models.MaterialTipo;
 import com.solicitacoes.seap.repository.query.MaterialRepositoryQuery;
@@ -12,4 +13,6 @@ public interface MaterialRepository extends JpaRepository<Material, Long>, Mater
     List<Material> findByQuantidade(int quantidade);
 
     List<Material> findByFkmaterialtipo(MaterialTipo fkmaterialtipo);
+
+    List<Material> findByFkcategoria(Categoria fkcategoria);
 }

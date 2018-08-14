@@ -4,7 +4,6 @@ import com.solicitacoes.seap.models.Material;
 import com.solicitacoes.seap.models.Material_;
 import com.solicitacoes.seap.repository.filter.MaterialFilter;
 import org.apache.commons.lang3.StringUtils;
-import org.hibernate.Criteria;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;

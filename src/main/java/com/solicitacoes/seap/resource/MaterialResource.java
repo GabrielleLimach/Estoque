@@ -1,6 +1,7 @@
 package com.solicitacoes.seap.resource;
 
 import com.solicitacoes.seap.event.RecursoCriadoEvent;
+import com.solicitacoes.seap.models.Categoria;
 import com.solicitacoes.seap.models.Material;
 import com.solicitacoes.seap.models.MaterialTipo;
 import com.solicitacoes.seap.repository.MaterialRepository;
@@ -51,7 +52,6 @@ public class MaterialResource {
         return materialRepository.filtrar(materialFilter, pegeable);
     }
 
-
     //retorna uma lista de materiais de acordo com a quantidade informada
     @GetMapping("/qde/{quantidade}")
     private List<Material> buscarPeloTipo(@PathVariable("quantidade") int id) {
@@ -66,6 +66,12 @@ public class MaterialResource {
 
         return materialRepository.findByFkmaterialtipo(id);
 
+    }
+
+    //retorna uma lista de materiais de com a categoria selecionada
+    @GetMapping("/categoria/{fkcategoria}")
+    private List<Material> buscaPelaCategoria(@PathVariable("fkcategoria") Categoria id){
+        return materialRepository.findByFkcategoria(id);
     }
 
     //retorna uma material especifico a partir do id (codigo) do material
